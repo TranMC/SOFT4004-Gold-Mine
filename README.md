@@ -196,15 +196,14 @@ Bản nguyên mẫu được coi là hoàn chỉnh khi:
 
 # Cấu Trúc Script Đề Xuất
 ```
-Scripts/
-
-GameManager.cs\
-LevelManager.cs\
-HookController.cs\
-HookMovement.cs\
-CollectibleObject.cs\
-ScoreManager.cs\
-TimerManager.cs
+Scripts
+ ├── GameManager.cs
+ ├── LevelManager.cs
+ ├── HookController.cs
+ ├── HookMovement.cs
+ ├── CollectibleObject.cs
+ ├── ScoreManager.cs
+ └── TimerManager.cs
 ```
 ------------------------------------------------------------------------
 
