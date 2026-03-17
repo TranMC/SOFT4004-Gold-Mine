@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095364974130",
+    "project_id": "gm10-1df91",
+    "storage_bucket": "gm10-1df91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095364974130:android:4bbf0efbb5810a53454e2b",
+        "android_client_info": {
+          "package_name": "com.senspark.goldminer.gm10"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk7_z7fqcdxLahH4LLwGJCwfVy7dpRXsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

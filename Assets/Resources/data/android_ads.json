@@ -1,0 +1,70 @@
+{
+  "networks": [
+    {
+      "network": "ad_mob"
+    }
+  ],
+  "ads": [
+    {
+      "format": "banner",
+      "load_interval": 10,
+      "reload_params": [
+        3,
+        3,
+        30
+      ],
+      "instance": [
+        {
+          "network": "ad_mob",
+          "id": "ca-app-pub-2101587572072038/3682532553"
+        }
+      ]
+    },
+    {
+      "format": "rect",
+      "load_interval": 10,
+      "reload_params": [
+        3,
+        3,
+        30
+      ],
+      "instance": [
+        {
+          "network": "ad_mob",
+          "id": "ca-app-pub-2101587572072038/9292543925"
+        }
+      ]
+    },
+    {
+      "format": "interstitial",
+      "interval": 15,
+      "load_interval": 10,
+      "reload_params": [
+        3,
+        3,
+        30
+      ],
+      "instance": [
+        {
+          "network": "ad_mob",
+          "id": "ca-app-pub-2101587572072038/8455089509"
+        }
+      ]
+    },
+    {
+      "format": "rewarded",
+      "load_interval": 10,
+      "reload_params": [
+        3,
+        3,
+        30
+      ],
+      "instance": [
+        {
+          "network": "ad_mob",
+          "id": "ca-app-pub-2101587572072038/7288101504"
+        }
+      ]
+    }
+  ]
+}
