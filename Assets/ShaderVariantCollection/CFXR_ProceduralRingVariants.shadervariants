@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CFXR_ProceduralRingVariants
+  m_Shaders:
+  - first: {fileID: 4800000, guid: 8b13a5568d6a9d64dba11cd05fb22bda, type: 3}
+    second:
+      variants:
+      - keywords: _ALPHABLEND_ON _ALPHATEST_ON _CFXR_DISSOLVE _CFXR_HDR_BOOST _CFXR_RADIAL_UV _CFXR_WORLD_SPACE_RING
+        passType: 13
+      - keywords: _ALPHABLEND_ON _CFXR_DISSOLVE _CFXR_HDR_BOOST _CFXR_RADIAL_UV _CFXR_WORLD_SPACE_RING
+        passType: 13
