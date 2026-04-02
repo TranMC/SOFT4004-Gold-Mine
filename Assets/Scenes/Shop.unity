@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 185386249}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 303509503}
   - component: {fileID: 303509502}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Wooden_SHELF-01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 728942835}
   - component: {fileID: 728942836}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Asset 16_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -649,10 +649,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1653775923
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e5a598398b540d24b8553fa1caa4c2b8, type: 2}
+  m_Sprite: {fileID: 21300000, guid: ca71cf49504f59648b2cc17c8a51b2eb, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -780,7 +780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237843391}
   - component: {fileID: 1237843392}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: strength-drink_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436859175}
   - component: {fileID: 1436859174}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Desciption_Board_Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563354341}
   - component: {fileID: 1563354342}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Asset 14_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651001027}
   - component: {fileID: 1651001028}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ui_dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1819054157}
   - component: {fileID: 1819054158}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lucky-clover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858312293}
   - component: {fileID: 1858312292}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Julie anim 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
