@@ -3,17 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
-  - 
-  - 
-  - 
+  - DescriptionBox
+  - ShopOwner
+  - Items
   - 
   - 
   - 
@@ -40,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1653775923
+    locked: 0
+  - name: ShopOwner
+    uniqueID: 1054302031
+    locked: 0
+  - name: DescriptionBox
+    uniqueID: 2583927967
+    locked: 0
+  - name: Items
+    uniqueID: 213521001
     locked: 0
