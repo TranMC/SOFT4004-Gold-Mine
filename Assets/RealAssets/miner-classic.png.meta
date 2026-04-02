@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,12 +126,12 @@ TextureImporter:
       name: miner-classic_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 890
-        width: 120
-        height: 108
+        x: 2
+        y: 909
+        width: 124
+        height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: miner-classic_1
       rect:
         serializedVersion: 2
-        x: 124
-        y: 894
-        width: 84
-        height: 119
+        x: 128
+        y: 909
+        width: 78
+        height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: miner-classic_2
       rect:
         serializedVersion: 2
-        x: 212
-        y: 912
-        width: 62
-        height: 104
+        x: 214
+        y: 911
+        width: 58
+        height: 99
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: miner-classic_3
       rect:
         serializedVersion: 2
-        x: 279
-        y: 903
+        x: 280
+        y: 904
         width: 60
-        height: 121
+        height: 108
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: miner-classic_4
       rect:
         serializedVersion: 2
-        x: 239
-        y: 870
-        width: 93
-        height: 36
+        x: 340
+        y: 963
+        width: 69
+        height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: miner-classic_5
       rect:
         serializedVersion: 2
-        x: 343
-        y: 888
-        width: 73
-        height: 20
+        x: 411
+        y: 958
+        width: 66
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: miner-classic_6
       rect:
         serializedVersion: 2
-        x: 338
-        y: 967
-        width: 67
-        height: 54
+        x: 248
+        y: 875
+        width: 79
+        height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,12 +273,12 @@ TextureImporter:
       name: miner-classic_7
       rect:
         serializedVersion: 2
-        x: 410
-        y: 950
-        width: 78
-        height: 59
+        x: 343
+        y: 888
+        width: 74
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -294,12 +294,12 @@ TextureImporter:
       name: miner-classic_8
       rect:
         serializedVersion: 2
-        x: 416
-        y: 872
-        width: 103
-        height: 71
+        x: 419
+        y: 875
+        width: 83
+        height: 67
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -315,12 +315,12 @@ TextureImporter:
       name: miner-classic_9
       rect:
         serializedVersion: 2
-        x: 547
-        y: 799
-        width: 144
-        height: 67
+        x: 1128
+        y: 742
+        width: 176
+        height: 203
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,12 +336,12 @@ TextureImporter:
       name: miner-classic_10
       rect:
         serializedVersion: 2
-        x: 767
-        y: 806
-        width: 109
-        height: 72
+        x: 1308
+        y: 741
+        width: 175
+        height: 187
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -357,12 +357,12 @@ TextureImporter:
       name: miner-classic_11
       rect:
         serializedVersion: 2
-        x: 993
-        y: 785
-        width: 84
-        height: 77
+        x: 50
+        y: 834
+        width: 6
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -378,12 +378,12 @@ TextureImporter:
       name: miner-classic_12
       rect:
         serializedVersion: 2
-        x: 1100
-        y: 728
-        width: 204
-        height: 224
+        x: 84
+        y: 829
+        width: 21
+        height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -399,12 +399,12 @@ TextureImporter:
       name: miner-classic_13
       rect:
         serializedVersion: 2
-        x: 1308
-        y: 724
-        width: 192
-        height: 222
+        x: 554
+        y: 799
+        width: 118
+        height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -420,12 +420,12 @@ TextureImporter:
       name: miner-classic_14
       rect:
         serializedVersion: 2
-        x: 993
-        y: 528
-        width: 86
-        height: 99
+        x: 785
+        y: 824
+        width: 61
+        height: 45
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,12 +441,12 @@ TextureImporter:
       name: miner-classic_15
       rect:
         serializedVersion: 2
-        x: 1224
-        y: 538
-        width: 103
-        height: 86
+        x: 1005
+        y: 801
+        width: 71
+        height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -462,12 +462,12 @@ TextureImporter:
       name: miner-classic_16
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 293
-        width: 113
-        height: 98
+        x: 112
+        y: 822
+        width: 13
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -483,12 +483,12 @@ TextureImporter:
       name: miner-classic_17
       rect:
         serializedVersion: 2
-        x: 1044
-        y: 324
-        width: 71
-        height: 51
+        x: 98
+        y: 646
+        width: 17
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -504,12 +504,12 @@ TextureImporter:
       name: miner-classic_18
       rect:
         serializedVersion: 2
-        x: 1248
-        y: 48
-        width: 104
-        height: 87
+        x: 128
+        y: 671
+        width: 13
+        height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -525,12 +525,12 @@ TextureImporter:
       name: miner-classic_19
       rect:
         serializedVersion: 2
-        x: 1387
-        y: 3
-        width: 256
-        height: 205
+        x: 746
+        y: 669
+        width: 14
+        height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -546,12 +546,12 @@ TextureImporter:
       name: miner-classic_20
       rect:
         serializedVersion: 2
-        x: 934
-        y: 2
-        width: 238
-        height: 250
+        x: 790
+        y: 673
+        width: 32
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -567,12 +567,12 @@ TextureImporter:
       name: miner-classic_21
       rect:
         serializedVersion: 2
-        x: 776
-        y: 144
-        width: 72
-        height: 51
+        x: 61
+        y: 645
+        width: 9
+        height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -588,12 +588,12 @@ TextureImporter:
       name: miner-classic_22
       rect:
         serializedVersion: 2
-        x: 783
-        y: 392
-        width: 91
-        height: 61
+        x: 342
+        y: 607
+        width: 118
+        height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -609,12 +609,12 @@ TextureImporter:
       name: miner-classic_23
       rect:
         serializedVersion: 2
-        x: 561
-        y: 408
-        width: 103
-        height: 72
+        x: 343
+        y: 551
+        width: 10
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -630,12 +630,12 @@ TextureImporter:
       name: miner-classic_24
       rect:
         serializedVersion: 2
-        x: 732
-        y: 668
-        width: 92
-        height: 36
+        x: 1003
+        y: 554
+        width: 61
+        height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -651,12 +651,12 @@ TextureImporter:
       name: miner-classic_25
       rect:
         serializedVersion: 2
-        x: 7
-        y: 773
-        width: 166
-        height: 104
+        x: 1230
+        y: 562
+        width: 72
+        height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -672,12 +672,12 @@ TextureImporter:
       name: miner-classic_26
       rect:
         serializedVersion: 2
-        x: 60
-        y: 620
-        width: 101
-        height: 88
+        x: 52
+        y: 518
+        width: 7
+        height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -693,12 +693,12 @@ TextureImporter:
       name: miner-classic_27
       rect:
         serializedVersion: 2
-        x: 32
-        y: 491
-        width: 99
-        height: 77
+        x: 81
+        y: 510
+        width: 20
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -714,12 +714,12 @@ TextureImporter:
       name: miner-classic_28
       rect:
         serializedVersion: 2
-        x: 36
-        y: 328
-        width: 112
-        height: 84
+        x: 107
+        y: 513
+        width: 15
+        height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -735,12 +735,12 @@ TextureImporter:
       name: miner-classic_29
       rect:
         serializedVersion: 2
-        x: 52
-        y: 178
-        width: 80
-        height: 65
+        x: 560
+        y: 426
+        width: 15
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -756,12 +756,12 @@ TextureImporter:
       name: miner-classic_30
       rect:
         serializedVersion: 2
-        x: 67
-        y: 57
-        width: 85
-        height: 69
+        x: 605
+        y: 434
+        width: 30
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -777,12 +777,12 @@ TextureImporter:
       name: miner-classic_31
       rect:
         serializedVersion: 2
-        x: 288
-        y: 19
-        width: 124
-        height: 53
+        x: 783
+        y: 392
+        width: 36
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -798,12 +798,12 @@ TextureImporter:
       name: miner-classic_32
       rect:
         serializedVersion: 2
-        x: 473
-        y: 24
-        width: 180
-        height: 248
+        x: 830
+        y: 399
+        width: 44
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -819,12 +819,12 @@ TextureImporter:
       name: miner-classic_33
       rect:
         serializedVersion: 2
-        x: 296
-        y: 224
-        width: 96
-        height: 37
+        x: 59
+        y: 361
+        width: 10
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -840,12 +840,12 @@ TextureImporter:
       name: miner-classic_34
       rect:
         serializedVersion: 2
-        x: 317
-        y: 551
-        width: 143
-        height: 134
+        x: 89
+        y: 351
+        width: 17
+        height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -853,6 +853,476 @@ TextureImporter:
       bones: []
       spriteID: 1034c04f81d181e44aeab224d1be2628
       internalID: -636813908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_35
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 373
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe46f53ea4029d84aa906b30d7a6e40d
+      internalID: -1055278322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_36
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 336
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7262e56cf7d1794691f89dea4c960c5
+      internalID: -1910994370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_37
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 325
+        width: 59
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1.5, y: -13.5}
+        - {x: -19.5, y: -13.5}
+        - {x: -19.5, y: -3.5}
+        - {x: 1.5, y: -2.5}
+        - {x: 11.5, y: 11.5}
+        - {x: 22.5, y: 11.5}
+        - {x: 18.5, y: -0.5}
+        - {x: 8.5, y: -10.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97266133a616e284988ba3a46be93c4d
+      internalID: -482446924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_38
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 308
+        width: 66
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ff660f58c1409479b624102ae885ba
+      internalID: -248712824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_39
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 234
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0229c08b060da114c9f322b3bec63bfa
+      internalID: 2016331079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_40
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 237
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 291ee13d31b5ae547b16f092b0f21b62
+      internalID: -1276850463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_41
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 24
+        width: 136
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3a2448405c58548ae27b0b94ec7237
+      internalID: -1320768110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_42
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 3
+        width: 224
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518f999d4c1dd7f4bbfd479cbe4adff4
+      internalID: 1902730121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_43
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 192
+        width: 12
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b2d83f11b6e68f489a089eac69dffb6
+      internalID: 1834272025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_44
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 225
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02dfa7dec690b5e48b5a309d69d1aad7
+      internalID: -854822398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_45
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 203
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1241282c8d40341b8bfd6d2767d14e
+      internalID: 1690766269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_46
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 202
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1cd950bcb663544b8b9732261d2e9b7
+      internalID: -1058537873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_47
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 144
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f497dc997c99d9a41a4d4029a0913383
+      internalID: 707676251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_48
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 165
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecd50eee73337eb4a840c7eceaa573d8
+      internalID: 151348149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_49
+      rect:
+        serializedVersion: 2
+        x: 1387
+        y: 3
+        width: 256
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e168ced1f82d4d45b449ea18d7e69fc
+      internalID: 1145097258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_50
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 82
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e104188696870cc4f895607e917092d3
+      internalID: -1897791963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_51
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 69
+        width: 14
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4274949161a4f314da4232f88d8ea828
+      internalID: 350883923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_52
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 83
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb66a33eb29aa7d4a9561b9744a895ad
+      internalID: -605870253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_53
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 75
+        width: 77
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceeca660557e418478e043e7858ce672
+      internalID: 1306545714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_54
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 65
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441080fca6876a442a0c22cd7c8972bd
+      internalID: -1099951341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_55
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 37
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a019a35187c8c24da3a458731dca650
+      internalID: 1222584526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: miner-classic_56
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 37
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbaccf32a73232a4890b54feada72a52
+      internalID: -554938221
       vertices: []
       indices: 
       edges: []
@@ -897,8 +1367,30 @@ TextureImporter:
       miner-classic_32: -1313520221
       miner-classic_33: -1940189626
       miner-classic_34: -636813908
+      miner-classic_35: -1055278322
+      miner-classic_36: -1910994370
+      miner-classic_37: -482446924
+      miner-classic_38: -248712824
+      miner-classic_39: 2016331079
       miner-classic_4: -468053616
+      miner-classic_40: -1276850463
+      miner-classic_41: -1320768110
+      miner-classic_42: 1902730121
+      miner-classic_43: 1834272025
+      miner-classic_44: -854822398
+      miner-classic_45: 1690766269
+      miner-classic_46: -1058537873
+      miner-classic_47: 707676251
+      miner-classic_48: 151348149
+      miner-classic_49: 1145097258
       miner-classic_5: -901014193
+      miner-classic_50: -1897791963
+      miner-classic_51: 350883923
+      miner-classic_52: -605870253
+      miner-classic_53: 1306545714
+      miner-classic_54: -1099951341
+      miner-classic_55: 1222584526
+      miner-classic_56: -554938221
       miner-classic_6: 209239928
       miner-classic_7: 2084932554
       miner-classic_8: 821690137
