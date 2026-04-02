@@ -52,4 +52,11 @@ public class InventoryManager : MonoBehaviour
         itemCounts[itemId]--;
         return true;
     }
+
+    public int GetCount(string itemId)
+    {
+        if (itemCounts.TryGetValue(itemId, out int count))
+            return count;
+        return 0;
+    }
 }

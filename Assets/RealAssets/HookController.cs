@@ -23,16 +23,21 @@ public class HookController : MonoBehaviour
     private float currentAngle;
     private int direction = 1;
 
-    private float currentLength;   // chiều dài hiện tại của dây
-    private float minLength;       // chiều dài tối thiểu
-    float ropeSpriteLength;         // chiều dài thực tế của sprite dây (để scale đúng)
+    private float currentLength;        // chiều dài hiện tại của dây
+    private float minLength;            // chiều dài tối thiểu
+    float ropeSpriteLength;             // chiều dài thực tế của sprite dây (để scale đúng)
+
+    private ItemController attachedItem = null;
+
+    // Expose cho PlayerController và PowerUpController
+    public bool IsRetracting => isRetracting;
+    public ItemController AttachedItem => attachedItem;
 
     void Start()
     {
-        minLength = Mathf.Abs(hook.localPosition.y); //chiều dài từ hook đến ropeAnchor
+        minLength = Mathf.Abs(hook.localPosition.y);
         currentLength = minLength;
         ropeSpriteLength = rope.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
-
     }
 
     void Update()
@@ -40,7 +45,7 @@ public class HookController : MonoBehaviour
         if (isSwinging)
         {
             Swing();
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (GetLaunchInput())
             {
                 Launch();
             }
@@ -56,6 +61,23 @@ public class HookController : MonoBehaviour
 
         UpdateRope();
     }
+
+    // ── Input ─────────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// PC: DownArrow. Mobile: chạm màn hình bất kỳ.
+    /// Tự động phân biệt theo nền tảng lúc build.
+    /// </summary>
+    bool GetLaunchInput()
+    {
+#if UNITY_ANDROID || UNITY_IOS
+        return Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
+#else
+        return Input.GetKeyDown(KeyCode.DownArrow);
+#endif
+    }
+
+    // ── Hook States ───────────────────────────────────────────────────────────
 
     void Swing()
     {
@@ -78,12 +100,9 @@ public class HookController : MonoBehaviour
     void Extend()
     {
         currentLength += launchSpeed * Time.deltaTime;
-        Vector3 hookWorldPos = hook.position;//Lấy vị trí hook trong world
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(hookWorldPos);//Convert sang viewport (0 → 1)
-        //x < 0	ra ngoài bên trái
-        //x > 1	ra ngoài bên phải
-        //y < 0	dưới màn
-        //y > 1	trên màn
+
+        Vector3 hookWorldPos = hook.position;
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(hookWorldPos);
 
         if (viewPos.x <= 0 || viewPos.x >= 1 || viewPos.y <= 0)
         {
@@ -99,7 +118,12 @@ public class HookController : MonoBehaviour
 
     void Retract()
     {
-        currentLength -= retractSpeed * Time.deltaTime;
+        // Lấy tốc độ từ WeightCalculator (có tính weight + Strength power-up)
+        float speed = WeightCalculator.Instance != null
+            ? WeightCalculator.Instance.GetRetractSpeed(attachedItem)
+            : retractSpeed;
+
+        currentLength -= speed * Time.deltaTime;
 
         if (currentLength <= minLength)
         {
@@ -110,20 +134,37 @@ public class HookController : MonoBehaviour
 
     void ResetHook()
     {
+        // Collect item nếu đang mang
+        attachedItem?.Collect();
+        attachedItem = null;
+
         isRetracting = false;
         isSwinging = true;
         currentAngle = 0;
+        direction = 1;
     }
 
     void UpdateRope()
     {
-        // 1. scale dây
-        rope.localScale = new Vector3(1, currentLength / ropeSpriteLength, 1); 
-        //Không thể gán trực tiếp currentLength vào scale vì Vector3 scale là tỉ lệ, còn currentLength là chiều dài thực tế
-        // công thức scale=1/localScale=ropeSpriteLength/currentLength =>  localScale=currentLength/ropeSpriteLength
-        //
-
-         // 2. đặt hook theo local 
+        rope.localScale = new Vector3(1, currentLength / ropeSpriteLength, 1);
         hook.localPosition = new Vector3(0, -currentLength, 0);
+    }
+
+    // ── Collision ─────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Hook cần Collider2D (Is Trigger = true) + Rigidbody2D (Body Type = Kinematic).
+    /// </summary>
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!isLaunched) return;
+        if (attachedItem != null) return; // đang mang rồi, bỏ qua
+
+        if (other.TryGetComponent<ItemController>(out var item))
+        {
+            attachedItem = item;
+            item.AttachToHook(hook);
+            StartRetract();
+        }
     }
 }

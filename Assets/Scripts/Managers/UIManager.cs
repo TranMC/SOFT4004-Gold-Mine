@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Quan ly UI gameplay: diem, thoi gian, panel pause/win/lose.
+/// Quan ly UI gameplay: diem, thoi gian, panel pause/win/lose, inventory power-up.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private Text scoreText;
     [SerializeField] private Text timerText;
+
+    [Header("Inventory HUD")]
+    [SerializeField] private Text bombCountText;
+    [SerializeField] private Text strengthCountText;
+    [SerializeField] private Text timeBoostCountText;
 
     [Header("Panels")]
     [SerializeField] private GameObject pausePanel;
@@ -58,6 +63,20 @@ public class UIManager : MonoBehaviour
         {
             timerText.text = $"Time: {Mathf.CeilToInt(timeRemaining)}";
         }
+    }
+
+    public void UpdateInventoryUI()
+    {
+        if (InventoryManager.Instance == null) return;
+
+        if (bombCountText != null)
+            bombCountText.text = $"x{InventoryManager.Instance.GetCount("Bomb")}";
+
+        if (strengthCountText != null)
+            strengthCountText.text = $"x{InventoryManager.Instance.GetCount("Strength")}";
+
+        if (timeBoostCountText != null)
+            timeBoostCountText.text = $"x{InventoryManager.Instance.GetCount("TimeBoost")}";
     }
 
     private void HandleGameStateChanged(GameState state)
