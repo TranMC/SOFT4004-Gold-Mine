@@ -43,7 +43,39 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        ApplyFrameRateSettings();
     }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            ApplyFrameRateSettings();
+        }
+    }
+
+    private void ApplyFrameRateSettings()
+    {
+#if UNITY_ANDROID || UNITY_IOS
+        const int fallbackTargetFps = 60;
+        const int highRefreshTargetFps = 120;
+
+        int detectedRefreshRate = GetDisplayRefreshRate();
+        int mobileTargetFps = detectedRefreshRate >= 110 ? highRefreshTargetFps : fallbackTargetFps;
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = mobileTargetFps;
+#endif
+    }
+
+        private static int GetDisplayRefreshRate()
+        {
+    #if UNITY_2022_2_OR_NEWER
+        return Mathf.RoundToInt((float)Screen.currentResolution.refreshRateRatio.value);
+    #else
+        return Screen.currentResolution.refreshRate;
+    #endif
+        }
 
     private void Start()
     {
