@@ -147,6 +147,8 @@ public class HookController : MonoBehaviour
     void UpdateRope()
     {
         rope.localScale = new Vector3(1, currentLength / ropeSpriteLength, 1);
+        //Không thể gán trực tiếp currentLength vào scale vì Vector3 scale là tỉ lệ, còn currentLength là chiều dài thực tế
+        // công thức scale=1/localScale=ropeSpriteLength/currentLength =>  localScale=currentLength/ropeSpriteLength
         hook.localPosition = new Vector3(0, -currentLength, 0);
     }
 
