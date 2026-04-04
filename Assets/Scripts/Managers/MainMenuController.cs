@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -79,5 +80,20 @@ public class MainMenuController : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    // Nút "Âm thanh"
+    [Header("Sound Toggle")]
+    [SerializeField] private Image soundIcon;
+    [SerializeField] private Sprite soundOnSprite;
+    [SerializeField] private Sprite soundOffSprite;
+    private bool isSoundOn = true;
+
+    public void OnSoundToggleClicked()
+    {
+        isSoundOn = !isSoundOn;
+        if (soundIcon != null)
+            soundIcon.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
+        Debug.Log("Am thanh: " + (isSoundOn ? "BAT" : "TAT"));
     }
 }

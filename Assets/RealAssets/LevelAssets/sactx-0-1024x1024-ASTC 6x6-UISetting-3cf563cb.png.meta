@@ -1110,33 +1110,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sactx-0-1024x1024-ASTC 6x6-UISetting-3cf563cb_47
-      rect:
-        serializedVersion: 2
-        x: 456
-        y: 236
-        width: 36
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9765bed70d5bc4047b8ce3e0d3d2b7f9
-      internalID: -907201229
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: sactx-0-1024x1024-ASTC 6x6-UISetting-3cf563cb_48
       rect:
         serializedVersion: 2
-        x: 494
+        x: 454
         y: 231
-        width: 34
+        width: 74
         height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
