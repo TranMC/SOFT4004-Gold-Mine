@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
         // TODO: map theo levelIndex neu co nhieu bo du lieu level.
         ResetLevel();
         SpawnLevelObjects();
+     UIManager.Instance?.UpdateTargetUI(targetScore);
+    UIManager.Instance?.UpdateCapUI(levelIndex);
     }
 
     public void StartLevel()

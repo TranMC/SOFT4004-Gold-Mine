@@ -1,21 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
-/// Quan ly UI gameplay: diem, thoi gian, panel pause/win/lose, inventory power-up.
+/// Quan ly UI gameplay: diem, thoi gian, panel pause/win/lose.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
     [Header("HUD")]
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text timerText;
-
-    [Header("Inventory HUD")]
-    [SerializeField] private Text bombCountText;
-    [SerializeField] private Text strengthCountText;
-    [SerializeField] private Text timeBoostCountText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text targetText;
+    [SerializeField] private TMP_Text capText;
 
     [Header("Panels")]
     [SerializeField] private GameObject pausePanel;
@@ -36,48 +34,41 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         if (GameManager.Instance != null)
-        {
             GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
-        }
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
-        {
             GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
-        }
     }
 
     public void UpdateScoreUI(int score)
     {
         if (scoreText != null)
-        {
-            scoreText.text = $"Score: {score}";
-        }
+            scoreText.text = $"Tien: ${score}";
     }
 
     public void UpdateTimeUI(float timeRemaining)
     {
         if (timerText != null)
-        {
-            timerText.text = $"Time: {Mathf.CeilToInt(timeRemaining)}";
-        }
+            timerText.text = $"TG: {Mathf.CeilToInt(timeRemaining)}";
     }
 
-    public void UpdateInventoryUI()
+    public void UpdateTargetUI(int target)
     {
-        if (InventoryManager.Instance == null) return;
-
-        if (bombCountText != null)
-            bombCountText.text = $"x{InventoryManager.Instance.GetCount("Bomb")}";
-
-        if (strengthCountText != null)
-            strengthCountText.text = $"x{InventoryManager.Instance.GetCount("Strength")}";
-
-        if (timeBoostCountText != null)
-            timeBoostCountText.text = $"x{InventoryManager.Instance.GetCount("TimeBoost")}";
+        if (targetText != null)
+            targetText.text = $"Muctieu: ${target}";
     }
+
+    public void UpdateCapUI(int level)
+    {
+        if (capText != null)
+            capText.text = $"Cap: {level}";
+    }
+
+    // Giữ lại để PowerUpController vẫn gọi được, không báo lỗi
+    public void UpdateInventoryUI() { }
 
     private void HandleGameStateChanged(GameState state)
     {
@@ -89,8 +80,6 @@ public class UIManager : MonoBehaviour
     private static void SetPanelActive(GameObject panel, bool active)
     {
         if (panel != null)
-        {
             panel.SetActive(active);
-        }
     }
 }
