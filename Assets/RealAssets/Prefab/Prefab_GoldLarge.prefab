@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   value: 250
-  weight: 3
+  weight: 10
   isHooked: 0
 --- !u!58 &2159981621415362846
 CircleCollider2D:
