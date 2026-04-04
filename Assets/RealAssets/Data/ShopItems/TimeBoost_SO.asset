@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e556c79d0b11e8d418aa90f965981b96, type: 3}
+  m_Name: TimeBoost_SO
+  m_EditorClassIdentifier: 
+  itemName: Time Boost
+  icon: {fileID: 21300000, guid: 7ca6e7eec27b1e0438cccf669cdac77a, type: 2}
+  price: 50
+  description: "Th\xEAm 10 gi\xE2y v\xE0o th\u1EDDi gian m\xE0n ch\u01A1i ti\u1EBFp
+    theo c\u1EE7a b\u1EA1n"
+  type: 2

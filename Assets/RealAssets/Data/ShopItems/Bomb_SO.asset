@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e556c79d0b11e8d418aa90f965981b96, type: 3}
+  m_Name: Bomb_SO
+  m_EditorClassIdentifier: 
+  itemName: Bomb / Dynamite
+  icon: {fileID: 21300000, guid: 9d0e998838abb8b4e9340642150f201a, type: 2}
+  price: 100
+  description: "Khi b\u1EA1n k\xE9o ph\u1EA3i v\u1EADt ph\u1EA9m n\u1EB7ng n\u1EC1
+    m\xE0 b\u1EA1n kh\xF4ng mu\u1ED7n, b\u1EA1n c\xF3 th\u1EC3 x\xF3a b\u1ECF v\u1EADt
+    ph\u1EA9m \u0111ang k\xE9o v\u1EC1 b\u1EB1ng vi\u1EC7c n\xE9m thu\u1ED1c n\u1ED5"
+  type: 0

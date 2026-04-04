@@ -56,7 +56,7 @@ public class ItemController : MonoBehaviour
             finalValue = ItemEffectManager.Instance.ApplyScoreModifier(value);
 
         ScoreManager.Instance?.AddScore(finalValue);
-        ShopManager.Instance?.AddMoney(finalValue);
+        // ShopManager.Instance?.AddMoney(finalValue); // Comment vì ShopManager mới không có hàm này
 
         Destroy(gameObject);
     }
