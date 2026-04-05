@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance { get; private set; }
 
     private readonly Dictionary<ShopItemType, int> itemCounts = new Dictionary<ShopItemType, int>();
+    [SerializeField] private int defaultBombCount = 3;
 
     [SerializeField] private int runCoins = 0;
 
@@ -35,6 +36,12 @@ public class InventoryManager : MonoBehaviour
     {
         runCoins = 0;
         itemCounts.Clear();
+
+        if (defaultBombCount > 0)
+        {
+            itemCounts[ShopItemType.Bomb] = defaultBombCount;
+        }
+
         OnRunCoinsChanged?.Invoke(runCoins);
         OnInventoryChanged?.Invoke();
     }

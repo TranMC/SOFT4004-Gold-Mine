@@ -1591,6 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c64d4c55540314a8ae9a810a10648a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultBombCount: 3
   runCoins: 0
 --- !u!4 &710096553
 Transform:
@@ -1968,16 +1969,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - levelIndex: 2
-    targetCoins: 1000
-    levelDuration: 60
+    targetCoins: 600
+    levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: 03bba95bf4c7c204eb87a64b693dc2d7, type: 3}
   - levelIndex: 3
-    targetCoins: 2000
-    levelDuration: 60
+    targetCoins: 1500
+    levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: 9511502a157e3894f87b509626d30d89, type: 3}
   - levelIndex: 4
     targetCoins: 3000
-    levelDuration: 60
+    levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: c992f07ab44829843bb66ec0e82f2d85, type: 3}
   - levelIndex: 1
     targetCoins: 100
