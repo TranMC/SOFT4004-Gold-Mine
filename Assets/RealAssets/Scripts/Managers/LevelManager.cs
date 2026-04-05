@@ -1,21 +1,52 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Quan ly noi dung level: spawn vat the, target score, reset level.
+/// Quan ly level xuyen scene: current level, target, timer va spawn prefab level.
+/// Cung quan ly buff co hieu luc cho level tiep theo.
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
+    [System.Serializable]
+    private class LevelDefinition
+    {
+        public int levelIndex = 1;
+        public int targetCoins = 500;
+        public float levelDuration = 60f;
+        public GameObject levelPrefab;
+    }
+
     public static LevelManager Instance { get; private set; }
 
     [Header("Level Config")]
-    [SerializeField] private int targetScore = 500;
-    [SerializeField] private List<GameObject> spawnPrefabs = new List<GameObject>();
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private List<LevelDefinition> levels = new List<LevelDefinition>();
+    [SerializeField] private Transform levelRoot;
 
-    private readonly List<GameObject> spawnedObjects = new List<GameObject>();
+    [Header("Runtime State")]
+    [SerializeField] private int currentLevel = 1;
 
-    public int TargetScore => targetScore;
+    private const int MinLevel = 1;
+    private const int MaxLevel = 3;
+
+    private GameObject currentLevelInstance;
+
+    private bool hasQueuedStrengthBoost;
+    private int queuedExtraTimeSeconds;
+    private float queuedGoldMultiplier = 1f;
+    private int currentScore;
+    private float remainingTime;
+    private bool isTimerRunning;
+
+    public int CurrentLevel => currentLevel;
+    public int CurrentScore => currentScore;
+    public float RemainingTime => remainingTime;
+    public int TargetScore { get; private set; } = 500;
+    public float CurrentLevelDuration { get; private set; } = 60f;
+    public bool StrengthBoostActiveThisLevel { get; private set; }
+    public float GoldMultiplierThisLevel { get; private set; } = 1f;
+
+    public event System.Action<int> OnLevelChanged;
 
     private void Awake()
     {
@@ -26,53 +57,243 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+        currentLevel = Mathf.Clamp(currentLevel, MinLevel, MaxLevel);
     }
 
-    public void InitializeLevel(int levelIndex)
+    private void OnEnable()
     {
-        // TODO: map theo levelIndex neu co nhieu bo du lieu level.
-        ResetLevel();
-        SpawnLevelObjects();
-     UIManager.Instance?.UpdateTargetUI(targetScore);
-    UIManager.Instance?.UpdateCapUI(levelIndex);
+        SceneManager.sceneLoaded += HandleSceneLoaded;
     }
 
-    public void StartLevel()
+    private void OnDisable()
     {
-        GameManager.Instance?.SetState(GameState.Playing);
-        TimerManager.Instance?.StartTimer();
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
-    public void ResetLevel()
+    private void Update()
     {
-        for (int i = 0; i < spawnedObjects.Count; i++)
-        {
-            if (spawnedObjects[i] != null)
-            {
-                Destroy(spawnedObjects[i]);
-            }
-        }
-
-        spawnedObjects.Clear();
-    }
-
-    private void SpawnLevelObjects()
-    {
-        if (spawnPrefabs.Count == 0 || spawnPoints == null || spawnPoints.Length == 0)
+        if (!isTimerRunning)
         {
             return;
         }
 
-        for (int i = 0; i < spawnPoints.Length; i++)
+        remainingTime -= Time.deltaTime;
+        remainingTime = Mathf.Max(remainingTime, 0f);
+        UIManager.Instance?.UpdateTimeUI(remainingTime);
+
+        if (remainingTime <= 0f)
         {
-            int randomIndex = Random.Range(0, spawnPrefabs.Count);
-            GameObject spawned = Instantiate(spawnPrefabs[randomIndex], spawnPoints[i].position, Quaternion.identity);
-            spawnedObjects.Add(spawned);
+            isTimerRunning = false;
+            GameManager.Instance?.HandleLose();
         }
     }
 
-    public void SetTargetScore(int amount)
+    public void InitializeLevel(int levelIndex)
     {
-        targetScore = Mathf.Max(0, amount);
+        SetCurrentLevel(levelIndex);
+        ApplyLevelData(currentLevel);
+        EnsureLevelRoot();
+
+        ResetLevel();
+        SpawnLevelPrefab();
+
+        StrengthBoostActiveThisLevel = hasQueuedStrengthBoost;
+        GoldMultiplierThisLevel = Mathf.Max(1f, queuedGoldMultiplier);
+
+        if (StrengthBoostActiveThisLevel)
+        {
+            // 1 level only: set duration cao de giu active tron level.
+            WeightCalculator.Instance?.ActivateStrength(CurrentLevelDuration + 1f);
+        }
+
+        currentScore = 0;
+        UIManager.Instance?.UpdateScoreUI(currentScore);
+
+        remainingTime = CurrentLevelDuration + queuedExtraTimeSeconds;
+        isTimerRunning = true;
+        UIManager.Instance?.UpdateTimeUI(remainingTime);
+
+        hasQueuedStrengthBoost = false;
+        queuedExtraTimeSeconds = 0;
+        queuedGoldMultiplier = 1f;
+
+        UIManager.Instance?.UpdateTargetUI(TargetScore);
+        UIManager.Instance?.UpdateCapUI(currentLevel);
+    }
+
+    public void SetCurrentLevel(int level)
+    {
+        int clamped = Mathf.Clamp(level, MinLevel, MaxLevel);
+        if (currentLevel == clamped)
+        {
+            return;
+        }
+
+        currentLevel = clamped;
+        OnLevelChanged?.Invoke(currentLevel);
+    }
+
+    public bool HasNextLevel()
+    {
+        return currentLevel < MaxLevel;
+    }
+
+    public void AdvanceLevel()
+    {
+        if (!HasNextLevel())
+        {
+            return;
+        }
+
+        currentLevel++;
+        OnLevelChanged?.Invoke(currentLevel);
+    }
+
+    public void StartNewRun()
+    {
+        currentLevel = MinLevel;
+        hasQueuedStrengthBoost = false;
+        queuedExtraTimeSeconds = 0;
+        queuedGoldMultiplier = 1f;
+        StrengthBoostActiveThisLevel = false;
+        GoldMultiplierThisLevel = 1f;
+        OnLevelChanged?.Invoke(currentLevel);
+    }
+
+    public void QueueStrengthBoostForNextLevel()
+    {
+        hasQueuedStrengthBoost = true;
+    }
+
+    public void QueueExtraTimeForNextLevel(int seconds)
+    {
+        queuedExtraTimeSeconds += Mathf.Max(0, seconds);
+    }
+
+    public void QueueGoldMultiplierForNextLevel(float multiplier)
+    {
+        queuedGoldMultiplier = Mathf.Max(queuedGoldMultiplier, Mathf.Max(1f, multiplier));
+    }
+
+    public int ApplyScoreModifiers(int baseScore)
+    {
+        return Mathf.RoundToInt(baseScore * GoldMultiplierThisLevel);
+    }
+
+    public void AddCollectedItemValue(int baseValue)
+    {
+        int finalScore = ApplyScoreModifiers(Mathf.Max(0, baseValue));
+
+        currentScore += finalScore;
+        InventoryManager.Instance?.AddCoins(finalScore);
+        UIManager.Instance?.UpdateScoreUI(currentScore);
+
+        if (currentScore >= TargetScore)
+        {
+            isTimerRunning = false;
+            GameManager.Instance?.HandleWin();
+        }
+    }
+
+    public void AddTime(float amount)
+    {
+        remainingTime += Mathf.Max(0f, amount);
+        UIManager.Instance?.UpdateTimeUI(remainingTime);
+    }
+
+    public void PauseTimer()
+    {
+        isTimerRunning = false;
+    }
+
+    public void ResumeTimer()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.CurrentState == GameState.Playing)
+        {
+            isTimerRunning = true;
+        }
+    }
+
+    public void ResetLevel()
+    {
+        if (currentLevelInstance != null)
+        {
+            Destroy(currentLevelInstance);
+            currentLevelInstance = null;
+        }
+    }
+
+    private void SpawnLevelPrefab()
+    {
+        LevelDefinition definition = FindDefinition(currentLevel);
+        if (definition == null || definition.levelPrefab == null)
+        {
+            return;
+        }
+
+        if (levelRoot == null)
+        {
+            EnsureLevelRoot();
+        }
+
+        currentLevelInstance = Instantiate(definition.levelPrefab, levelRoot);
+        currentLevelInstance.name = definition.levelPrefab.name;
+    }
+
+    private void ApplyLevelData(int levelIndex)
+    {
+        LevelDefinition definition = FindDefinition(levelIndex);
+
+        if (definition == null)
+        {
+            TargetScore = 500;
+            CurrentLevelDuration = 60f;
+            return;
+        }
+
+        TargetScore = Mathf.Max(0, definition.targetCoins);
+        CurrentLevelDuration = Mathf.Max(1f, definition.levelDuration);
+    }
+
+    private LevelDefinition FindDefinition(int levelIndex)
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (levels[i] != null && levels[i].levelIndex == levelIndex)
+            {
+                return levels[i];
+            }
+        }
+
+        return null;
+    }
+
+    private void EnsureLevelRoot()
+    {
+        if (levelRoot != null)
+        {
+            return;
+        }
+
+        GameObject rootObj = GameObject.Find("LevelRoot");
+        if (rootObj == null)
+        {
+            rootObj = new GameObject("LevelRoot");
+            SceneManager.MoveGameObjectToScene(rootObj, SceneManager.GetActiveScene());
+        }
+
+        levelRoot = rootObj.transform;
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!scene.name.ToLowerInvariant().Contains("level"))
+        {
+            return;
+        }
+
+        levelRoot = null;
+        EnsureLevelRoot();
     }
 }

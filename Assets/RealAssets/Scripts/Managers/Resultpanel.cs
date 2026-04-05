@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Hien thi panel ket qua cuoi level (Pass/Fail).
-/// Wire vao GameManager.OnGameStateChanged de tu dong hien thi.
+/// Hien thi panel ket qua cuoi level va dieu huong theo flow game.
 /// </summary>
 public class ResultPanel : MonoBehaviour
 {
@@ -70,36 +69,38 @@ public class ResultPanel : MonoBehaviour
         backToMenuButton.gameObject.SetActive(true); // fail thi hien nut ve menu
     }
 
-    /// <summary>
-    /// Pass: tu dong xu ly flow qua GameStateManager (Shop hoac MainMenu).
-    /// </summary>
     private IEnumerator AutoProceedAfterPass()
     {
         yield return new WaitForSecondsRealtime(2f);
 
-        if (GameStateManager.Instance == null)
+        if (LevelManager.Instance == null)
         {
             GameManager.Instance?.GoToMainMenu();
             yield break;
         }
 
-        var result = GameStateManager.Instance.ResolvePassFlow();
+        PlayerProgressManager.Instance?.SaveBestScore(
+            LevelManager.Instance.CurrentLevel,
+            LevelManager.Instance.CurrentScore
+        );
 
-        if (result == LevelFlowResult.ContinueToShop)
+        if (LevelManager.Instance.HasNextLevel())
         {
-            GameStateManager.Instance.AdvanceLevel();
+            LevelManager.Instance.AdvanceLevel();
             GameManager.Instance?.GoToShop();
         }
         else
         {
-            GameStateManager.Instance.StartNewRun();
+            LevelManager.Instance.StartNewRun();
+            InventoryManager.Instance?.StartNewRun();
             GameManager.Instance?.GoToMainMenu();
         }
     }
 
     private void OnBackToMenuClicked()
     {
-        GameStateManager.Instance?.StartNewRun();
+        LevelManager.Instance?.StartNewRun();
+        InventoryManager.Instance?.StartNewRun();
         GameManager.Instance?.GoToMainMenu();
     }
 }

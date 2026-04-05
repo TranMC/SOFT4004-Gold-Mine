@@ -25,12 +25,11 @@ public class MainMenuController : MonoBehaviour
     // Nút "Bắt đầu"
     public void OnStartButton()
     {
-        // New game: reset data cơ bản (tùy game bạn có thể thêm key khác)
         PlayerPrefs.SetInt(LastUnlockedLevelKey, 1);
         PlayerPrefs.SetInt(HasSaveKey, 1);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene(gameplaySceneName);
+        GameManager.Instance?.OnPlayButtonClicked();
     }
 
     // Nút "Tiếp tục"
@@ -38,13 +37,11 @@ public class MainMenuController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt(HasSaveKey, 0) == 1)
         {
-            // Có save thì vào game
-            SceneManager.LoadScene(gameplaySceneName);
+            GameManager.Instance?.StartLevel(LevelManager.Instance != null ? LevelManager.Instance.CurrentLevel : 1);
         }
         else
         {
             Debug.Log("Chưa có dữ liệu lưu để tiếp tục.");
-            // Có thể hiện popup "Chưa có dữ liệu"
         }
     }
 
@@ -73,13 +70,7 @@ public class MainMenuController : MonoBehaviour
     // Nút "Thoát"
     public void OnQuitButton()
     {
-        Debug.Log("Thoát game");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        GameManager.Instance?.OnQuitButtonClicked();
     }
 
     // Nút "Âm thanh"
@@ -87,13 +78,34 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Image soundIcon;
     [SerializeField] private Sprite soundOnSprite;
     [SerializeField] private Sprite soundOffSprite;
-    private bool isSoundOn = true;
+
+    private void OnEnable()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.OnMuteStateChanged += HandleMuteStateChanged;
+            HandleMuteStateChanged(AudioManager.Instance.IsMuted);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.OnMuteStateChanged -= HandleMuteStateChanged;
+        }
+    }
 
     public void OnSoundToggleClicked()
     {
-        isSoundOn = !isSoundOn;
+        AudioManager.Instance?.ToggleMute();
+    }
+
+    private void HandleMuteStateChanged(bool isMuted)
+    {
         if (soundIcon != null)
-            soundIcon.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
-        Debug.Log("Am thanh: " + (isSoundOn ? "BAT" : "TAT"));
+        {
+            soundIcon.sprite = isMuted ? soundOffSprite : soundOnSprite;
+        }
     }
 }

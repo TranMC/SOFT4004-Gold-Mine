@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    private const string MutePrefKey = "AudioManager_Muted";
+
     [Header("Music Clips")]
     [SerializeField] private AudioClip menuMusic;
     [SerializeField] private AudioClip levelMusic;
@@ -21,6 +23,10 @@ public class AudioManager : MonoBehaviour
     [Header("Defaults")]
     [SerializeField] private bool playMusicOnSceneLoaded = true;
 
+    public bool IsMuted { get; private set; }
+
+    public event System.Action<bool> OnMuteStateChanged;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,6 +38,9 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         EnsureAudioSources();
+
+        IsMuted = PlayerPrefs.GetInt(MutePrefKey, 0) == 1;
+        ApplyMuteState();
     }
 
     private void OnEnable()
@@ -81,7 +90,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySfx(AudioClip clip, float volumeScale = 1f)
     {
-        if (sfxSource == null || clip == null)
+        if (IsMuted || sfxSource == null || clip == null)
         {
             return;
         }
@@ -135,6 +144,40 @@ public class AudioManager : MonoBehaviour
             sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
             sfxSource.loop = false;
+        }
+    }
+
+    public void ToggleMute()
+    {
+        SetMute(!IsMuted);
+    }
+
+    public void SetMute(bool mute)
+    {
+        if (IsMuted == mute)
+        {
+            return;
+        }
+
+        IsMuted = mute;
+        ApplyMuteState();
+
+        PlayerPrefs.SetInt(MutePrefKey, IsMuted ? 1 : 0);
+        PlayerPrefs.Save();
+
+        OnMuteStateChanged?.Invoke(IsMuted);
+    }
+
+    private void ApplyMuteState()
+    {
+        if (musicSource != null)
+        {
+            musicSource.mute = IsMuted;
+        }
+
+        if (sfxSource != null)
+        {
+            sfxSource.mute = IsMuted;
         }
     }
 }

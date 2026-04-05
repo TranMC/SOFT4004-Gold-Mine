@@ -68,7 +68,7 @@ public class PowerUpController : MonoBehaviour
     {
         if (!InventoryManager.Instance.UseItem(ID_TIMEBOOST)) return;
 
-        TimerManager.Instance?.AddTime(timeBoostAmount);
+        LevelManager.Instance?.AddTime(timeBoostAmount);
         UIManager.Instance?.UpdateInventoryUI();
     }
 }

@@ -7,15 +7,16 @@ public class ShopManager : MonoBehaviour
     public static ShopManager Instance { get; private set; }
 
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI coinText;                    // Text hiển thị số coin (vùng vàng)
-    [SerializeField] private TextMeshProUGUI descriptionText;             // Text mô tả ở DescriptionBoardBG (vùng đỏ)
+    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
 
-    [Header("Inventory Keys (PlayerPrefs)")]
-    private const string BOMB_KEY = "BombCount";
-    private const string STRENGTH_KEY = "StrengthCount";
-    private const string TIMEB00ST_KEY = "TimeBoostCount";
+    [Header("Dynamic Shop")]
+    [SerializeField] private ShopItemUI itemPrefab;
+    [SerializeField] private Transform itemContainer;
+    [SerializeField] private List<ShopItem> itemCatalog = new List<ShopItem>();
+    [SerializeField] private int itemCountPerVisit = 3;
 
-    private int playerCoin = 500;   // Bạn có thể thay đổi giá trị khởi điểm
+    private readonly List<ShopItemUI> generatedItems = new List<ShopItemUI>();
 
     private void Awake()
     {
@@ -24,14 +25,33 @@ public class ShopManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);   // Nếu muốn giữ coin qua scene
 
-        LoadCoin();
-        UpdateCoinUI();
+        Instance = this;
     }
 
-    // Hiển thị mô tả khi hover
+    private void Start()
+    {
+        RefreshShopItems();
+        UpdateCoinUI();
+
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnRunCoinsChanged += UpdateCoinUI;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnRunCoinsChanged -= UpdateCoinUI;
+        }
+    }
+
+    // ========================
+    // DESCRIPTION UI
+    // ========================
+
     public void ShowDescription(string desc)
     {
         if (descriptionText != null)
@@ -44,76 +64,103 @@ public class ShopManager : MonoBehaviour
             descriptionText.text = "";
     }
 
-    // Mua item (được gọi từ ShopItemUI)
+    // ========================
+    // BUY ITEM
+    // ========================
+
     public void BuyItem(ShopItemUI itemUI, ShopItem itemData)
     {
-        if (itemData == null) return;
+        if (itemData == null || InventoryManager.Instance == null)
+        {
+            return;
+        }
 
-        if (playerCoin < itemData.price)
+        if (!InventoryManager.Instance.TrySpendCoins(itemData.price))
         {
             Debug.Log("Không đủ coin!");
             return;
         }
 
-        // Trừ coin
-        playerCoin -= itemData.price;
-        SaveCoin();
-        UpdateCoinUI();
+        InventoryManager.Instance.AddItem(itemData.type, 1);
 
-        // Thêm vào inventory
-        AddToInventory(itemData.type);
-
-        // Ẩn item sau khi mua
-        if (itemUI != null)
-            itemUI.DisableItem();
-
-        Debug.Log($"Đã mua: {itemData.itemName} - Giá: {itemData.price}");
-    }
-
-    private void AddToInventory(ShopItemType type)
-    {
-        switch (type)
+        // Item mua trong shop ap dung cho level tiep theo.
+        if (LevelManager.Instance != null)
         {
-            case ShopItemType.Bomb:
-                int bomb = PlayerPrefs.GetInt(BOMB_KEY, 0) + 1;
-                PlayerPrefs.SetInt(BOMB_KEY, bomb);
-                break;
-
-            case ShopItemType.Strength:
-                int strength = PlayerPrefs.GetInt(STRENGTH_KEY, 0) + 1;
-                PlayerPrefs.SetInt(STRENGTH_KEY, strength);
-                break;
-
-            case ShopItemType.TimeBoost:
-                int time = PlayerPrefs.GetInt(TIMEB00ST_KEY, 0) + 1;
-                PlayerPrefs.SetInt(TIMEB00ST_KEY, time);
-                break;
+            switch (itemData.type)
+            {
+                case ShopItemType.Strength:
+                    LevelManager.Instance.QueueStrengthBoostForNextLevel();
+                    break;
+                case ShopItemType.TimeBoost:
+                    LevelManager.Instance.QueueExtraTimeForNextLevel(10);
+                    break;
+                case ShopItemType.Bomb:
+                    break;
+            }
         }
 
-        PlayerPrefs.Save();
+        if (itemUI != null)
+        {
+            itemUI.DisableItem();
+        }
+
+        Debug.Log($"Đã mua: {itemData.itemName}");
     }
 
-    // Coin UI
-    private void UpdateCoinUI()
+    // ========================
+    // COIN UI
+    // ========================
+
+    private void UpdateCoinUI(int coin)
     {
         if (coinText != null)
-            coinText.text = playerCoin.ToString();
+            coinText.text = coin.ToString();
     }
 
-    private void SaveCoin()
+    private void UpdateCoinUI()
     {
-        PlayerPrefs.SetInt("PlayerCoin", playerCoin);
+        if (coinText != null && InventoryManager.Instance != null)
+            coinText.text = InventoryManager.Instance.RunCoins.ToString();
     }
 
-    private void LoadCoin()
-    {
-        playerCoin = PlayerPrefs.GetInt("PlayerCoin", 500);   // Giá trị mặc định 500 coin
-    }
+    // ========================
+    // BUTTON
+    // ========================
 
-    // Nút Chơi Tiếp
     public void OnContinueButtonClicked()
     {
-        // Load scene Level (bạn có thể thay bằng tên scene thực tế)
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level");
+        GameManager.Instance?.GoToNextLevelFromShop();
+    }
+
+    public void RefreshShopItems()
+    {
+        if (itemPrefab == null || itemContainer == null || itemCatalog.Count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < generatedItems.Count; i++)
+        {
+            if (generatedItems[i] != null)
+            {
+                Destroy(generatedItems[i].gameObject);
+            }
+        }
+
+        generatedItems.Clear();
+
+        List<ShopItem> pool = new List<ShopItem>(itemCatalog);
+        int spawnCount = Mathf.Clamp(itemCountPerVisit, 1, pool.Count);
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            int randomIndex = Random.Range(0, pool.Count);
+            ShopItem selected = pool[randomIndex];
+            pool.RemoveAt(randomIndex);
+
+            ShopItemUI ui = Instantiate(itemPrefab, itemContainer);
+            ui.shopItemData = selected;
+            generatedItems.Add(ui);
+        }
     }
 }

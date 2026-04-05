@@ -11,7 +11,7 @@ public enum ItemType
 
 /// <summary>
 /// Gan vao moi prefab item trong scene (vang, da, kim cuong).
-/// Xu ly: attach vao hook, collect ve ScoreManager, wire weight cho HookController.
+/// Xu ly: attach vao hook, collect ve LevelManager, wire weight cho HookController.
 /// </summary>
 public class ItemController : MonoBehaviour
 {
@@ -46,17 +46,11 @@ public class ItemController : MonoBehaviour
 
     /// <summary>
     /// Duoc goi boi HookController khi keo ve den minLength.
-    /// Cong diem (co nhan he so tu ItemEffectManager), cong tien, destroy item.
+    /// Cong diem va coin theo logic cua LevelManager, sau do destroy item.
     /// </summary>
     public void Collect()
     {
-        int finalValue = value;
-
-        if (ItemEffectManager.Instance != null)
-            finalValue = ItemEffectManager.Instance.ApplyScoreModifier(value);
-
-        ScoreManager.Instance?.AddScore(finalValue);
-        // ShopManager.Instance?.AddMoney(finalValue); // Comment vì ShopManager mới không có hàm này
+        LevelManager.Instance?.AddCollectedItemValue(value);
 
         Destroy(gameObject);
     }

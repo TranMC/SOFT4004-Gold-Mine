@@ -22,12 +22,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Scene Names")]
     [SerializeField] private string mainMenuScene = "MainMenu";
-    [SerializeField] private string levelSelectScene = "LevelSelect";
-    [SerializeField] private string levelDemoScene = "LevelDemo";
+    [SerializeField] private string levelScene = "Level";
     [SerializeField] private string shopScene = "Shop";
-
-    [Header("Level Progress")]
-    [SerializeField] private int currentLevelIndex = 1;
 
     public GameState CurrentState { get; private set; } = GameState.Menu;
 
@@ -95,11 +91,11 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Pause:
                 Time.timeScale = 0f;
-                TimerManager.Instance?.PauseTimer();
+                LevelManager.Instance?.PauseTimer();
                 break;
             case GameState.Playing:
                 Time.timeScale = 1f;
-                TimerManager.Instance?.ResumeTimer();
+                LevelManager.Instance?.ResumeTimer();
                 break;
             default:
                 Time.timeScale = 1f;
@@ -115,23 +111,21 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene);
     }
 
-    public void GoToLevelSelect()
+    public void OnPlayButtonClicked()
     {
-        SetState(GameState.Menu);
-        SceneManager.LoadScene(levelSelectScene);
+        LevelManager.Instance?.StartNewRun();
+        InventoryManager.Instance?.StartNewRun();
+        StartLevel(1);
     }
 
     public void StartLevel(int levelIndex)
     {
-        currentLevelIndex = levelIndex;
-        SceneManager.LoadScene(levelDemoScene);
-
-        // Goi trong scene gameplay sau khi cac manager da san sang.
+        LevelManager.Instance?.SetCurrentLevel(levelIndex);
         SetState(GameState.Playing);
+
+        SceneManager.LoadScene(levelScene);
+
         LevelManager.Instance?.InitializeLevel(levelIndex);
-        ScoreManager.Instance?.ResetScore();
-        TimerManager.Instance?.StartTimer();
-        ItemEffectManager.Instance?.ApplyItemEffectsForLevelStart();
     }
 
     public void PauseGame()
@@ -178,12 +172,39 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevelFromShop()
     {
-        currentLevelIndex++;
-        StartLevel(currentLevelIndex);
+        if (LevelManager.Instance == null)
+        {
+            GoToMainMenu();
+            return;
+        }
+
+        if (!LevelManager.Instance.HasNextLevel())
+        {
+            GoToMainMenu();
+            return;
+        }
+
+        LevelManager.Instance.AdvanceLevel();
+        StartLevel(LevelManager.Instance.CurrentLevel);
     }
 
     public void ReplayCurrentLevel()
     {
-        StartLevel(currentLevelIndex);
+        if (LevelManager.Instance == null)
+        {
+            StartLevel(1);
+            return;
+        }
+
+        StartLevel(LevelManager.Instance.CurrentLevel);
+    }
+
+    public void OnQuitButtonClicked()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
