@@ -179,6 +179,7 @@ public class HookController : MonoBehaviour
     public void DetachAttachedItem()
     {
         attachedItem = null;
+    }
     private void EnsurePullLoopSource()
     {
         if (pullLoopSource != null)

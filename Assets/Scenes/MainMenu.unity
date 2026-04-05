@@ -1968,22 +1968,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - levelIndex: 2
+  - levelIndex: 1
     targetCoins: 600
     levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: 03bba95bf4c7c204eb87a64b693dc2d7, type: 3}
-  - levelIndex: 3
+  - levelIndex: 2
     targetCoins: 1500
     levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: 9511502a157e3894f87b509626d30d89, type: 3}
-  - levelIndex: 4
+  - levelIndex: 3
     targetCoins: 3000
     levelDuration: 30
     levelPrefab: {fileID: 3787394915704301862, guid: c992f07ab44829843bb66ec0e82f2d85, type: 3}
-  - levelIndex: 1
-    targetCoins: 100
-    levelDuration: 10
-    levelPrefab: {fileID: 3787394915704301862, guid: 8a65a2d510ad7af42ae898e4b45a5298, type: 3}
   levelRoot: {fileID: 0}
   currentLevel: 1
 --- !u!4 &1104991753
