@@ -120,7 +120,7 @@ public class ShopManager : MonoBehaviour
     private void UpdateCoinUI()
     {
         if (coinText != null && InventoryManager.Instance != null)
-            coinText.text = InventoryManager.Instance.RunCoins.ToString();
+            coinText.text = "$" + InventoryManager.Instance.RunCoins.ToString();
     }
 
     // ========================

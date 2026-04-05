@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; } = GameState.Menu;
 
+    private int pendingLevelIndex = -1;
+
     public event Action<GameState> OnGameStateChanged;
 
     private void Awake()
@@ -40,6 +42,16 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         ApplyFrameRateSettings();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     private void OnApplicationFocus(bool hasFocus)
@@ -97,6 +109,11 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 LevelManager.Instance?.ResumeTimer();
                 break;
+            case GameState.Win:
+            case GameState.Lose:
+                Time.timeScale = 0f;
+                LevelManager.Instance?.PauseTimer();
+                break;
             default:
                 Time.timeScale = 1f;
                 break;
@@ -120,12 +137,17 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel(int levelIndex)
     {
-        LevelManager.Instance?.SetCurrentLevel(levelIndex);
-        SetState(GameState.Playing);
+        pendingLevelIndex = levelIndex;
 
+        if (SceneManager.GetActiveScene().name == levelScene)
+        {
+            SetState(GameState.Playing);
+            InitializePendingLevel();
+            return;
+        }
+
+        // Don't set state to Playing yet - wait for scene to load, then HandleSceneLoaded will set it
         SceneManager.LoadScene(levelScene);
-
-        LevelManager.Instance?.InitializeLevel(levelIndex);
     }
 
     public void PauseGame()
@@ -206,5 +228,29 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != levelScene)
+        {
+            return;
+        }
+
+        // Initialize level first, then set state to Playing to ensure Time.timeScale is properly set
+        InitializePendingLevel();
+        SetState(GameState.Playing);
+    }
+
+    private void InitializePendingLevel()
+    {
+        if (pendingLevelIndex <= 0)
+        {
+            return;
+        }
+
+        LevelManager.Instance?.SetCurrentLevel(pendingLevelIndex);
+        LevelManager.Instance?.InitializeLevel(pendingLevelIndex);
+        pendingLevelIndex = -1;
     }
 }

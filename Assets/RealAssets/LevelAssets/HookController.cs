@@ -130,8 +130,7 @@ public class HookController : MonoBehaviour
 
         isRetracting = false;
         isSwinging = true;
-        currentAngle = 0;
-        direction = 1;
+
     }
 
     void UpdateRope()

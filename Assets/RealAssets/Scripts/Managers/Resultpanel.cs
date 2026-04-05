@@ -15,6 +15,7 @@ public class ResultPanel : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private float showDelay = 1f;         // delay truoc khi hien panel
+    [SerializeField] private float autoProceedDelay = 2f;   // thoi gian hien ket qua truoc khi auto chuyen scene
     [SerializeField] private string passMessage = "Bạn đã lên cấp độ tiếp!";
     [SerializeField] private string failMessage = "Bạn chưa hoàn thành nhiệm vụ!";
 
@@ -57,7 +58,7 @@ public class ResultPanel : MonoBehaviour
     {
         panel.SetActive(true);
         messageText.text = passMessage;
-        backToMenuButton.gameObject.SetActive(false); // pass thi tu dong chuyen scene, khong can nut
+        backToMenuButton.gameObject.SetActive(false);
 
         StartCoroutine(AutoProceedAfterPass());
     }
@@ -66,12 +67,14 @@ public class ResultPanel : MonoBehaviour
     {
         panel.SetActive(true);
         messageText.text = failMessage;
-        backToMenuButton.gameObject.SetActive(true); // fail thi hien nut ve menu
+        backToMenuButton.gameObject.SetActive(false);
+
+        StartCoroutine(AutoProceedAfterFail());
     }
 
     private IEnumerator AutoProceedAfterPass()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(autoProceedDelay);
 
         if (LevelManager.Instance == null)
         {
@@ -86,7 +89,7 @@ public class ResultPanel : MonoBehaviour
 
         if (LevelManager.Instance.HasNextLevel())
         {
-            LevelManager.Instance.AdvanceLevel();
+            // Don't call AdvanceLevel() here - GoToNextLevelFromShop() will handle it
             GameManager.Instance?.GoToShop();
         }
         else
@@ -99,6 +102,15 @@ public class ResultPanel : MonoBehaviour
 
     private void OnBackToMenuClicked()
     {
+        LevelManager.Instance?.StartNewRun();
+        InventoryManager.Instance?.StartNewRun();
+        GameManager.Instance?.GoToMainMenu();
+    }
+
+    private IEnumerator AutoProceedAfterFail()
+    {
+        yield return new WaitForSecondsRealtime(autoProceedDelay);
+
         LevelManager.Instance?.StartNewRun();
         InventoryManager.Instance?.StartNewRun();
         GameManager.Instance?.GoToMainMenu();

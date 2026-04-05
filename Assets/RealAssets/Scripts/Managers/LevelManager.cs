@@ -85,7 +85,15 @@ public class LevelManager : MonoBehaviour
         if (remainingTime <= 0f)
         {
             isTimerRunning = false;
-            GameManager.Instance?.HandleLose();
+            // Check win/lose condition only when time runs out
+            if (currentScore >= TargetScore)
+            {
+                GameManager.Instance?.HandleWin();
+            }
+            else
+            {
+                GameManager.Instance?.HandleLose();
+            }
         }
     }
 
@@ -183,17 +191,18 @@ public class LevelManager : MonoBehaviour
 
     public void AddCollectedItemValue(int baseValue)
     {
+        if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameState.Playing)
+        {
+            return;
+        }
+
         int finalScore = ApplyScoreModifiers(Mathf.Max(0, baseValue));
 
         currentScore += finalScore;
         InventoryManager.Instance?.AddCoins(finalScore);
         UIManager.Instance?.UpdateScoreUI(currentScore);
-
-        if (currentScore >= TargetScore)
-        {
-            isTimerRunning = false;
-            GameManager.Instance?.HandleWin();
-        }
+        
+        // Don't check win condition here - wait until timer hits 0
     }
 
     public void AddTime(float amount)

@@ -35,6 +35,12 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance != null)
             GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+
+        // Value-only defaults to avoid duplicating static labels in the canvas.
+        UpdateScoreUI(0);
+        UpdateTargetUI(0);
+        UpdateTimeUI(0f);
+        UpdateCapUI(1);
     }
 
     private void OnDisable()
@@ -46,25 +52,25 @@ public class UIManager : MonoBehaviour
     public void UpdateScoreUI(int score)
     {
         if (scoreText != null)
-            scoreText.text = $"Tien: ${score}";
+            scoreText.text = $"${score}";
     }
 
     public void UpdateTimeUI(float timeRemaining)
     {
         if (timerText != null)
-            timerText.text = $"TG: {Mathf.CeilToInt(timeRemaining)}";
+            timerText.text = Mathf.CeilToInt(timeRemaining).ToString();
     }
 
     public void UpdateTargetUI(int target)
     {
         if (targetText != null)
-            targetText.text = $"Muctieu: ${target}";
+            targetText.text = $"${target}";
     }
 
     public void UpdateCapUI(int level)
     {
         if (capText != null)
-            capText.text = $"Cap: {level}";
+            capText.text = level.ToString();
     }
 
     // Giữ lại để PowerUpController vẫn gọi được, không báo lỗi

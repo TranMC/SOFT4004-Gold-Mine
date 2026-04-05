@@ -23,10 +23,12 @@ public class ItemController : MonoBehaviour
     [HideInInspector] public bool isHooked = false;
 
     private Collider2D col;
+    private SpriteRenderer[] spriteRenderers;
 
     private void Awake()
     {
         col = GetComponent<Collider2D>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     /// <summary>
@@ -37,11 +39,17 @@ public class ItemController : MonoBehaviour
         if (isHooked) return;
 
         isHooked = true;
-        col.enabled = false;
+        if (col != null)
+        {
+            col.enabled = false;
+        }
 
         transform.SetParent(hookTransform);
-        transform.localPosition = Vector3.zero;
+        // Keep item slightly below hook head so player can still see it while retracting.
+        transform.localPosition = new Vector3(0f, -0.2f, 0f);
         transform.localRotation = Quaternion.identity;
+
+        BringToFrontWhileHooked();
     }
 
     /// <summary>
@@ -63,5 +71,23 @@ public class ItemController : MonoBehaviour
     {
         transform.SetParent(null);
         Destroy(gameObject);
+    }
+
+    private void BringToFrontWhileHooked()
+    {
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (spriteRenderers[i] == null)
+            {
+                continue;
+            }
+
+            spriteRenderers[i].sortingOrder += 20;
+        }
     }
 }
