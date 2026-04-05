@@ -328,7 +328,7 @@ RectTransform:
   m_GameObject: {fileID: 250069388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 286615023}
@@ -336,7 +336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -72, y: 34}
+  m_AnchoredPosition: {x: -220, y: 117}
   m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &250069390
@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60.957}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69, y: -18}
+  m_AnchoredPosition: {x: 65, y: -27}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292751940
@@ -1969,15 +1969,15 @@ MonoBehaviour:
   levels:
   - levelIndex: 1
     targetCoins: 100
-    levelDuration: 2
+    levelDuration: 10
     levelPrefab: {fileID: 3787394915704301862, guid: 8a65a2d510ad7af42ae898e4b45a5298, type: 3}
   - levelIndex: 2
     targetCoins: 100
-    levelDuration: 2
+    levelDuration: 10
     levelPrefab: {fileID: 3787394915704301862, guid: 8a65a2d510ad7af42ae898e4b45a5298, type: 3}
   - levelIndex: 3
     targetCoins: 100
-    levelDuration: 2
+    levelDuration: 60
     levelPrefab: {fileID: 3787394915704301862, guid: 8a65a2d510ad7af42ae898e4b45a5298, type: 3}
   levelRoot: {fileID: 0}
   currentLevel: 1

@@ -115,7 +115,8 @@ public class LevelManager : MonoBehaviour
             WeightCalculator.Instance?.ActivateStrength(CurrentLevelDuration + 1f);
         }
 
-        currentScore = 0;
+        // Keep total run coins across levels.
+        currentScore = InventoryManager.Instance != null ? InventoryManager.Instance.RunCoins : 0;
         UIManager.Instance?.UpdateScoreUI(currentScore);
 
         remainingTime = CurrentLevelDuration + queuedExtraTimeSeconds;
