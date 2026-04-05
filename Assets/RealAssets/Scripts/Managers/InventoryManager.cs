@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     public int RunCoins => runCoins;
 
     public event System.Action<int> OnRunCoinsChanged;
+    public event System.Action OnInventoryChanged;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class InventoryManager : MonoBehaviour
         runCoins = 0;
         itemCounts.Clear();
         OnRunCoinsChanged?.Invoke(runCoins);
+        OnInventoryChanged?.Invoke();
     }
 
     public void AddCoins(int amount)
@@ -78,6 +80,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         itemCounts[itemType] += amount;
+        OnInventoryChanged?.Invoke();
     }
 
     public bool HasItem(ShopItemType itemType)
@@ -93,6 +96,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         itemCounts[itemType]--;
+        OnInventoryChanged?.Invoke();
         return true;
     }
 

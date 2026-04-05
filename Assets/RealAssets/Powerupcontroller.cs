@@ -12,6 +12,7 @@ public class PowerUpController : MonoBehaviour
     [Header("Config")]
     [SerializeField] private float strengthDuration = 10f;
     [SerializeField] private float timeBoostAmount = 10f;
+    [SerializeField] private GameObject bombExplosionPrefab;
 
     [Header("Refs")]
     [SerializeField] private HookController hookController;
@@ -37,14 +38,28 @@ public class PowerUpController : MonoBehaviour
     /// </summary>
     public void UseBomb()
     {
-        if (!InventoryManager.Instance.UseItem(ID_BOMB)) return;
-        if (hookController == null) return;
+        if (hookController == null || hookController.AttachedItem == null)
+        {
+            return;
+        }
+
+        if (InventoryManager.Instance == null || !InventoryManager.Instance.UseItem(ID_BOMB))
+        {
+            return;
+        }
 
         // Lay item dang attach tu HookController
         ItemController attached = hookController.AttachedItem;
         if (attached != null)
         {
+            if (bombExplosionPrefab != null)
+            {
+                GameObject effect = Instantiate(bombExplosionPrefab, attached.transform.position, Quaternion.identity);
+                Destroy(effect, 2f);
+            }
+
             attached.DropAndDestroy();
+            hookController.DetachAttachedItem();
         }
 
         UIManager.Instance?.UpdateInventoryUI();

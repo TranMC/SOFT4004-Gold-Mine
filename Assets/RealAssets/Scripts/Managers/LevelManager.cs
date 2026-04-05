@@ -33,7 +33,6 @@ public class LevelManager : MonoBehaviour
 
     private bool hasQueuedStrengthBoost;
     private int queuedExtraTimeSeconds;
-    private float queuedGoldMultiplier = 1f;
     private int currentScore;
     private float remainingTime;
     private bool isTimerRunning;
@@ -44,7 +43,6 @@ public class LevelManager : MonoBehaviour
     public int TargetScore { get; private set; } = 500;
     public float CurrentLevelDuration { get; private set; } = 60f;
     public bool StrengthBoostActiveThisLevel { get; private set; }
-    public float GoldMultiplierThisLevel { get; private set; } = 1f;
 
     public event System.Action<int> OnLevelChanged;
 
@@ -107,7 +105,6 @@ public class LevelManager : MonoBehaviour
         SpawnLevelPrefab();
 
         StrengthBoostActiveThisLevel = hasQueuedStrengthBoost;
-        GoldMultiplierThisLevel = Mathf.Max(1f, queuedGoldMultiplier);
 
         if (StrengthBoostActiveThisLevel)
         {
@@ -125,7 +122,6 @@ public class LevelManager : MonoBehaviour
 
         hasQueuedStrengthBoost = false;
         queuedExtraTimeSeconds = 0;
-        queuedGoldMultiplier = 1f;
 
         UIManager.Instance?.UpdateTargetUI(TargetScore);
         UIManager.Instance?.UpdateCapUI(currentLevel);
@@ -164,9 +160,7 @@ public class LevelManager : MonoBehaviour
         currentLevel = MinLevel;
         hasQueuedStrengthBoost = false;
         queuedExtraTimeSeconds = 0;
-        queuedGoldMultiplier = 1f;
         StrengthBoostActiveThisLevel = false;
-        GoldMultiplierThisLevel = 1f;
         OnLevelChanged?.Invoke(currentLevel);
     }
 
@@ -180,14 +174,9 @@ public class LevelManager : MonoBehaviour
         queuedExtraTimeSeconds += Mathf.Max(0, seconds);
     }
 
-    public void QueueGoldMultiplierForNextLevel(float multiplier)
-    {
-        queuedGoldMultiplier = Mathf.Max(queuedGoldMultiplier, Mathf.Max(1f, multiplier));
-    }
-
     public int ApplyScoreModifiers(int baseScore)
     {
-        return Mathf.RoundToInt(baseScore * GoldMultiplierThisLevel);
+        return Mathf.Max(0, baseScore);
     }
 
     public void AddCollectedItemValue(int baseValue)

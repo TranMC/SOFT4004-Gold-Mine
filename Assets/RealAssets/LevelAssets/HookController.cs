@@ -56,10 +56,23 @@ public class HookController : MonoBehaviour
         }
         else if (isRetracting)
         {
+            TryUseBombInput();
             Retract();
         }
 
         UpdateRope();
+    }
+
+    private void TryUseBombInput()
+    {
+#if UNITY_ANDROID || UNITY_IOS
+        return;
+#else
+        if (Input.GetKeyDown(KeyCode.UpArrow) && attachedItem != null)
+        {
+            PowerUpController.Instance?.UseBomb();
+        }
+#endif
     }
 
     bool GetLaunchInput()
@@ -153,5 +166,10 @@ public class HookController : MonoBehaviour
             item.AttachToHook(hook);
             StartRetract();
         }
+    }
+
+    public void DetachAttachedItem()
+    {
+        attachedItem = null;
     }
 }

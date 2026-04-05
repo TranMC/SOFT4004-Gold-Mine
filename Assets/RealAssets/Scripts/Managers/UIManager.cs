@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text targetText;
     [SerializeField] private TMP_Text capText;
+    [SerializeField] private Image bombIconImage;
+    [SerializeField] private TMP_Text bombCountText;
 
     [Header("Panels")]
     [SerializeField] private GameObject pausePanel;
@@ -36,17 +38,24 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance != null)
             GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
 
+        if (InventoryManager.Instance != null)
+            InventoryManager.Instance.OnInventoryChanged += UpdateInventoryUI;
+
         // Value-only defaults to avoid duplicating static labels in the canvas.
         UpdateScoreUI(0);
         UpdateTargetUI(0);
         UpdateTimeUI(0f);
         UpdateCapUI(1);
+        UpdateInventoryUI();
     }
 
     private void OnDisable()
     {
         if (GameManager.Instance != null)
             GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+
+        if (InventoryManager.Instance != null)
+            InventoryManager.Instance.OnInventoryChanged -= UpdateInventoryUI;
     }
 
     public void UpdateScoreUI(int score)
@@ -73,8 +82,22 @@ public class UIManager : MonoBehaviour
             capText.text = level.ToString();
     }
 
-    // Giữ lại để PowerUpController vẫn gọi được, không báo lỗi
-    public void UpdateInventoryUI() { }
+    public void UpdateInventoryUI()
+    {
+        if (bombCountText != null)
+        {
+            int bombCount = InventoryManager.Instance != null
+                ? InventoryManager.Instance.GetCount(ShopItemType.Bomb)
+                : 0;
+
+            bombCountText.text = $"x{bombCount}";
+        }
+
+        if (bombIconImage != null)
+        {
+            bombIconImage.enabled = true;
+        }
+    }
 
     private void HandleGameStateChanged(GameState state)
     {
