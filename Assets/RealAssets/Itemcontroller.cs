@@ -3,8 +3,10 @@ using UnityEngine;
 public enum ItemType
 {
     GoldSmall,
+    GoldMedium,
     GoldLarge,
     StoneSmall,
+    StoneMedium,
     StoneLarge,
     Diamond
 }

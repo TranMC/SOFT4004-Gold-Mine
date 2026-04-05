@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1167b405c8239428266e3c6be7eee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 1
-  value: 250
-  weight: 10
+  itemType: 2
+  value: 400
+  weight: 20
   isHooked: 0
 --- !u!58 &2159981621415362846
 CircleCollider2D:
