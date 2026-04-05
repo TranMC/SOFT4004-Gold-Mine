@@ -23,6 +23,12 @@ public class AudioManager : MonoBehaviour
     [Header("Defaults")]
     [SerializeField] private bool playMusicOnSceneLoaded = true;
 
+    [Header("Music Volume")]
+    [SerializeField, Range(0f, 1f)] private float volume = 1f;
+    [SerializeField, Range(0f, 1f)] private float menuMusicVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float levelMusicVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float shopMusicVolume = 1f;
+
     public bool IsMuted { get; private set; }
 
     public event System.Action<bool> OnMuteStateChanged;
@@ -61,19 +67,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip clip, bool loop = true)
+    public void PlayMusic(AudioClip clip, bool loop = true, float volumeScale = 1f)
     {
         if (musicSource == null || clip == null)
         {
             return;
         }
 
+        musicSource.loop = loop;
+        musicSource.volume = Mathf.Clamp01(volume * Mathf.Clamp01(volumeScale));
+
         if (musicSource.clip == clip && musicSource.isPlaying)
         {
             return;
         }
 
-        musicSource.loop = loop;
         musicSource.clip = clip;
         musicSource.Play();
     }
@@ -104,19 +112,19 @@ public class AudioManager : MonoBehaviour
 
         if (lower.Contains("mainmenu") || lower.Contains("menu"))
         {
-            PlayMusic(menuMusic);
+            PlayMusic(menuMusic, true, menuMusicVolume);
             return;
         }
 
         if (lower.Contains("shop"))
         {
-            PlayMusic(shopMusic);
+            PlayMusic(shopMusic, true, shopMusicVolume);
             return;
         }
 
         if (lower.Contains("level") || lower.Contains("game"))
         {
-            PlayMusic(levelMusic);
+            PlayMusic(levelMusic, true, levelMusicVolume);
         }
     }
 

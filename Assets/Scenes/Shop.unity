@@ -286,6 +286,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 1890654017}
   descriptionText: {fileID: 1717191138}
+  buySuccessClip: {fileID: 8300000, guid: 6760bf0b99751ac47a2702ac0d3f543f, type: 3}
+  buySuccessVolume: 1
+  itemPrefab: {fileID: 0}
+  itemContainer: {fileID: 0}
+  itemCatalog: []
+  itemCountPerVisit: 3
 --- !u!4 &292540537
 Transform:
   m_ObjectHideFlags: 0
@@ -742,7 +748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -225.73001, y: 181.81}
+  m_AnchoredPosition: {x: -225.7301, y: 181.81}
   m_SizeDelta: {x: -451.47, y: 363.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013742317

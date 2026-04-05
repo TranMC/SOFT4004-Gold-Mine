@@ -1967,18 +1967,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - levelIndex: 1
+  - levelIndex: 2
     targetCoins: 1000
     levelDuration: 60
     levelPrefab: {fileID: 3787394915704301862, guid: 03bba95bf4c7c204eb87a64b693dc2d7, type: 3}
-  - levelIndex: 2
+  - levelIndex: 3
     targetCoins: 2000
     levelDuration: 60
     levelPrefab: {fileID: 3787394915704301862, guid: 9511502a157e3894f87b509626d30d89, type: 3}
-  - levelIndex: 3
+  - levelIndex: 4
     targetCoins: 3000
     levelDuration: 60
     levelPrefab: {fileID: 3787394915704301862, guid: c992f07ab44829843bb66ec0e82f2d85, type: 3}
+  - levelIndex: 1
+    targetCoins: 100
+    levelDuration: 10
+    levelPrefab: {fileID: 3787394915704301862, guid: 8a65a2d510ad7af42ae898e4b45a5298, type: 3}
   levelRoot: {fileID: 0}
   currentLevel: 1
 --- !u!4 &1104991753
@@ -2083,6 +2087,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1377520675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377520677}
+  - component: {fileID: 1377520676}
+  - component: {fileID: 1377520678}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1377520676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377520675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdd895a6f52acd448dcb056352988c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 8300000, guid: a45e1cbaad8b12943b66c10060e1d2a0, type: 3}
+  levelMusic: {fileID: 8300000, guid: 2fabbc22c337a60408420eb26aa7096f, type: 3}
+  shopMusic: {fileID: 0}
+  musicSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  playMusicOnSceneLoaded: 1
+  volume: 1
+  menuMusicVolume: 1
+  levelMusicVolume: 0.063
+  shopMusicVolume: 1
+--- !u!4 &1377520677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377520675}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24290201, y: -0.008193867, z: 1702.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377520678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377520675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b8eb21e88d43948a3c2cb402080c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinGainClip: {fileID: 8300000, guid: f680b59da815be449a487b3bc3a50246, type: 3}
+  volume: 1
 --- !u!1 &1403385439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,3 +3615,4 @@ SceneRoots:
   - {fileID: 1104991753}
   - {fileID: 710096553}
   - {fileID: 75007711}
+  - {fileID: 1377520677}

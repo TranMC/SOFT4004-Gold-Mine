@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1446105673484218571}
   - component: {fileID: 1627531884747373730}
   - component: {fileID: 5962737898294060658}
+  - component: {fileID: 6597360980137316293}
   m_Layer: 0
   m_Name: Prefab_GoldMedium
   m_TagString: Untagged
@@ -165,3 +166,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6597360980137316293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086574349175937656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a975be84aed79468d766e3ca1c0d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: {fileID: 8300000, guid: 42c6ebdf13128c84a823bc93ff22b709, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  loop: 0
+  playWhenTouchHook: 1
+  useCollisionEvents: 0
+  triggerOnce: 0
+  playDelay: 0.25

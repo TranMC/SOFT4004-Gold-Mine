@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6059163050768526867}
   - component: {fileID: 9045787930035360984}
   - component: {fileID: 8967288018661676826}
+  - component: {fileID: 4835237739130301779}
   m_Layer: 0
   m_Name: Prefab_GoldSmall
   m_TagString: Untagged
@@ -165,3 +166,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4835237739130301779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036169099724028029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a975be84aed79468d766e3ca1c0d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: {fileID: 8300000, guid: 42c6ebdf13128c84a823bc93ff22b709, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  loop: 0
+  playWhenTouchHook: 1
+  useCollisionEvents: 0
+  triggerOnce: 0
+  playDelay: 0.25

@@ -551,7 +551,7 @@ Canvas:
   m_GameObject: {fileID: 429679688}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1519849553}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -563,7 +563,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &429679692
 RectTransform:
@@ -1648,6 +1648,8 @@ MonoBehaviour:
   ropeAnchor: {fileID: 1652360996}
   hook: {fileID: 662467056}
   rope: {fileID: 1227345926}
+  pullLoopClip: {fileID: 8300000, guid: a8c5ed70e6b9d9341a7ff027b78cdf82, type: 3}
+  pullLoopVolume: 1
 --- !u!1 &1227345925
 GameObject:
   m_ObjectHideFlags: 0
