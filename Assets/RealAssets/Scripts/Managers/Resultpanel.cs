@@ -11,7 +11,6 @@ public class ResultPanel : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_Text messageText;
-    [SerializeField] private Button backToMenuButton;
 
     [Header("Config")]
     [SerializeField] private float showDelay = 1f;         // delay truoc khi hien panel
@@ -22,8 +21,6 @@ public class ResultPanel : MonoBehaviour
     private void Awake()
     {
         panel.SetActive(false);
-        backToMenuButton.gameObject.SetActive(false);
-        backToMenuButton.onClick.AddListener(OnBackToMenuClicked);
     }
 
     private void OnEnable()
@@ -58,7 +55,6 @@ public class ResultPanel : MonoBehaviour
     {
         panel.SetActive(true);
         messageText.text = passMessage;
-        backToMenuButton.gameObject.SetActive(false);
 
         StartCoroutine(AutoProceedAfterPass());
     }
@@ -67,7 +63,6 @@ public class ResultPanel : MonoBehaviour
     {
         panel.SetActive(true);
         messageText.text = failMessage;
-        backToMenuButton.gameObject.SetActive(false);
 
         StartCoroutine(AutoProceedAfterFail());
     }
