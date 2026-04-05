@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HookController : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class HookController : MonoBehaviour
 
     private ItemController attachedItem = null;
     private AudioSource pullLoopSource;
+    private Button androidTntButton;
+    private bool isAndroidTntButtonBound;
 
     public bool IsRetracting => isRetracting;
     public ItemController AttachedItem => attachedItem;
@@ -44,10 +47,18 @@ public class HookController : MonoBehaviour
         currentLength = minLength;
         ropeSpriteLength = rope.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
         EnsurePullLoopSource();
+        TryBindAndroidTntButton();
     }
 
     void Update()
     {
+#if UNITY_ANDROID
+        if (!isAndroidTntButtonBound)
+        {
+            TryBindAndroidTntButton();
+        }
+#endif
+
         if (isSwinging)
         {
             Swing();
@@ -67,6 +78,51 @@ public class HookController : MonoBehaviour
         }
 
         UpdateRope();
+    }
+
+    private void OnDestroy()
+    {
+        if (androidTntButton != null && isAndroidTntButtonBound)
+        {
+            androidTntButton.onClick.RemoveListener(OnAndroidTntButtonPressed);
+        }
+    }
+
+    private void TryBindAndroidTntButton()
+    {
+#if UNITY_ANDROID
+        if (isAndroidTntButtonBound)
+        {
+            return;
+        }
+
+        GameObject tntButtonObject = GameObject.Find("AndroidTNTButton");
+        if (tntButtonObject == null)
+        {
+            return;
+        }
+
+        androidTntButton = tntButtonObject.GetComponent<Button>();
+        if (androidTntButton == null)
+        {
+            return;
+        }
+
+        androidTntButton.onClick.AddListener(OnAndroidTntButtonPressed);
+        isAndroidTntButtonBound = true;
+#endif
+    }
+
+    private void OnAndroidTntButtonPressed()
+    {
+#if UNITY_ANDROID
+        if (attachedItem == null || !isRetracting)
+        {
+            return;
+        }
+
+        PowerUpController.Instance?.UseBomb();
+#endif
     }
 
     private void TryUseBombInput()

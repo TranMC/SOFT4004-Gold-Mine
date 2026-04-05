@@ -13,6 +13,8 @@ public class PowerUpController : MonoBehaviour
     [SerializeField] private float strengthDuration = 10f;
     [SerializeField] private float timeBoostAmount = 10f;
     [SerializeField] private GameObject bombExplosionPrefab;
+    [SerializeField] private AudioClip bombExplosionSfx;
+    [SerializeField, Range(0f, 1f)] private float bombExplosionSfxVolume = 1f;
 
     [Header("Refs")]
     [SerializeField] private HookController hookController;
@@ -56,6 +58,18 @@ public class PowerUpController : MonoBehaviour
             {
                 GameObject effect = Instantiate(bombExplosionPrefab, attached.transform.position, Quaternion.identity);
                 Destroy(effect, 2f);
+            }
+
+            if (bombExplosionSfx != null)
+            {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlaySfx(bombExplosionSfx, bombExplosionSfxVolume);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(bombExplosionSfx, attached.transform.position, Mathf.Clamp01(bombExplosionSfxVolume));
+                }
             }
 
             attached.DropAndDestroy();
