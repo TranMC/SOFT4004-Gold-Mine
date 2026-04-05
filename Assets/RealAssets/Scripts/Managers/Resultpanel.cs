@@ -38,9 +38,34 @@ public class ResultPanel : MonoBehaviour
     private void HandleStateChanged(GameState state)
     {
         if (state == GameState.Win)
+        {
+            StopAllPlayOneShotAudio();
             StartCoroutine(ShowWithDelay(true));
+        }
         else if (state == GameState.Lose)
             StartCoroutine(ShowWithDelay(false));
+    }
+
+    private static void StopAllPlayOneShotAudio()
+    {
+        MonoBehaviour[] allBehaviours = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < allBehaviours.Length; i++)
+        {
+            MonoBehaviour behaviour = allBehaviours[i];
+            if (behaviour == null)
+            {
+                continue;
+            }
+
+            System.Type type = behaviour.GetType();
+            if (type.Name != "PlayOneShotAudio")
+            {
+                continue;
+            }
+
+            System.Reflection.MethodInfo stopMethod = type.GetMethod("StopNow", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+            stopMethod?.Invoke(behaviour, null);
+        }
     }
 
     private IEnumerator ShowWithDelay(bool isPass)

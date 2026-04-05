@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4989948663018584272}
   - component: {fileID: 4798192788585157827}
   - component: {fileID: 7795551535622051708}
+  - component: {fileID: 1386469956809099797}
   m_Layer: 0
   m_Name: Prefab_Diamond
   m_TagString: Untagged
@@ -165,3 +166,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.28
+--- !u!114 &1386469956809099797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7771654668002948645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a975be84aed79468d766e3ca1c0d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: {fileID: 8300000, guid: 1eb5593980369754dbf5189f1d8df513, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  loop: 0
+  playWhenTouchHook: 1
+  useCollisionEvents: 0
+  triggerOnce: 0
+  playDelay: 0.25

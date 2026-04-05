@@ -17,6 +17,10 @@ public class HookController : MonoBehaviour
     public Transform hook;
     public Transform rope;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip pullLoopClip;
+    [SerializeField, Range(0f, 1f)] private float pullLoopVolume = 1f;
+
     private bool isSwinging = true;
     private bool isLaunched = false;
     private bool isRetracting = false;
@@ -29,6 +33,7 @@ public class HookController : MonoBehaviour
     float ropeSpriteLength;
 
     private ItemController attachedItem = null;
+    private AudioSource pullLoopSource;
 
     public bool IsRetracting => isRetracting;
     public ItemController AttachedItem => attachedItem;
@@ -38,6 +43,7 @@ public class HookController : MonoBehaviour
         minLength = Mathf.Abs(hook.localPosition.y);
         currentLength = minLength;
         ropeSpriteLength = rope.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
+        EnsurePullLoopSource();
     }
 
     void Update()
@@ -125,6 +131,7 @@ public class HookController : MonoBehaviour
 
     void ResetHook()
     {
+        StopPullLoopAudio();
         attachedItem?.Collect();
         attachedItem = null;
 
@@ -151,7 +158,59 @@ public class HookController : MonoBehaviour
         {
             attachedItem = item;
             item.AttachToHook(hook);
+            StartPullLoopAudio();
             StartRetract();
+        }
+    }
+
+    private void EnsurePullLoopSource()
+    {
+        if (pullLoopSource != null)
+        {
+            return;
+        }
+
+        GameObject sourceOwner = hook != null ? hook.gameObject : gameObject;
+        pullLoopSource = sourceOwner.GetComponent<AudioSource>();
+
+        if (pullLoopSource == null)
+        {
+            pullLoopSource = sourceOwner.AddComponent<AudioSource>();
+        }
+
+        pullLoopSource.playOnAwake = false;
+        pullLoopSource.loop = true;
+        pullLoopSource.volume = Mathf.Clamp01(pullLoopVolume);
+    }
+
+    private void StartPullLoopAudio()
+    {
+        if (pullLoopClip == null)
+        {
+            return;
+        }
+
+        EnsurePullLoopSource();
+        if (pullLoopSource == null)
+        {
+            return;
+        }
+
+        pullLoopSource.clip = pullLoopClip;
+        pullLoopSource.volume = Mathf.Clamp01(pullLoopVolume);
+        pullLoopSource.mute = AudioManager.Instance != null && AudioManager.Instance.IsMuted;
+
+        if (!pullLoopSource.isPlaying)
+        {
+            pullLoopSource.Play();
+        }
+    }
+
+    private void StopPullLoopAudio()
+    {
+        if (pullLoopSource != null && pullLoopSource.isPlaying)
+        {
+            pullLoopSource.Stop();
         }
     }
 }

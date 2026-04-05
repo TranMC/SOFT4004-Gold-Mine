@@ -10,6 +10,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI descriptionText;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip buySuccessClip;
+    [SerializeField, Range(0f, 1f)] private float buySuccessVolume = 1f;
+
     [Header("Dynamic Shop")]
     [SerializeField] private ShopItemUI itemPrefab;
     [SerializeField] private Transform itemContainer;
@@ -104,7 +108,25 @@ public class ShopManager : MonoBehaviour
             itemUI.DisableItem();
         }
 
+        PlayBuySuccessSfx();
+
         Debug.Log($"Đã mua: {itemData.itemName}");
+    }
+
+    private void PlayBuySuccessSfx()
+    {
+        if (buySuccessClip == null)
+        {
+            return;
+        }
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySfx(buySuccessClip, buySuccessVolume);
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(buySuccessClip, transform.position, Mathf.Clamp01(buySuccessVolume));
     }
 
     // ========================

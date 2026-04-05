@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4072317202886556750}
   - component: {fileID: 8489269908419010288}
   - component: {fileID: 5415694216834899349}
+  - component: {fileID: 8854854043173319869}
   m_Layer: 0
   m_Name: Prefab_StoneLarge
   m_TagString: Untagged
@@ -165,3 +166,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8854854043173319869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69820246098618009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a975be84aed79468d766e3ca1c0d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: {fileID: 8300000, guid: 40bc714c14ece9f44a5a125ac96fbc34, type: 3}
+  volume: 1
+  playOnEnter: 1
+  playOnExit: 0
+  playAfterDelay: 0
+  loop: 0
+  playWhenTouchHook: 1
+  useCollisionEvents: 0
+  triggerOnce: 0
+  playDelay: 0.25
