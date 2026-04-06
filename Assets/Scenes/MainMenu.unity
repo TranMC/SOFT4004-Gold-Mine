@@ -2064,11 +2064,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adac42edc51f39648baee00435e84189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplaySceneName: Level
-  settingsPanel: {fileID: 0}
   soundIcon: {fileID: 2135147477}
   soundOnSprite: {fileID: -330680839, guid: 0522f559d45ca9040a90ec13e35a8a0b, type: 3}
   soundOffSprite: {fileID: 829692001, guid: 0522f559d45ca9040a90ec13e35a8a0b, type: 3}
+  soundToggleButton: {fileID: 2135147478}
 --- !u!4 &1252087644
 Transform:
   m_ObjectHideFlags: 0

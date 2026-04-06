@@ -1,25 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MainMenuController : MonoBehaviour
 {
-    [Header("Scene Settings")]
-    [SerializeField] private string gameplaySceneName = "GameScene";
+    // [Header("Scene Settings")]
+    // [SerializeField] private string gameplaySceneName = "GameScene";
 
-    [Header("UI Panels")]
-    [SerializeField] private GameObject settingsPanel;
+    // [Header("UI Panels")]
+    // [SerializeField] private GameObject settingsPanel;
 
     private const string LastUnlockedLevelKey = "LastUnlockedLevel";
     private const string HasSaveKey = "HasSaveData";
 
     private void Start()
     {
-        // Ẩn panel cài đặt lúc mở menu (nếu có gán)
-        if (settingsPanel != null)
-        {
-            settingsPanel.SetActive(false);
-        }
+        // // Ẩn panel cài đặt lúc mở menu (nếu có gán)
+        // if (settingsPanel != null)
+        // {
+        //     settingsPanel.SetActive(false);
+        // }
     }
 
     // Nút "Bắt đầu"
@@ -46,26 +47,26 @@ public class MainMenuController : MonoBehaviour
     }
 
     // Nút "Cài đặt"
-    public void OnSettingsButton()
-    {
-        if (settingsPanel != null)
-        {
-            settingsPanel.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Chưa gán Settings Panel trong MainMenuController.");
-        }
-    }
+    // public void OnSettingsButton()
+    // {
+    //     if (settingsPanel != null)
+    //     {
+    //         settingsPanel.SetActive(true);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("Chưa gán Settings Panel trong MainMenuController.");
+    //     }
+    // }
 
-    // Nút trong panel cài đặt để đóng lại
-    public void OnCloseSettingsButton()
-    {
-        if (settingsPanel != null)
-        {
-            settingsPanel.SetActive(false);
-        }
-    }
+    // // Nút trong panel cài đặt để đóng lại
+    // public void OnCloseSettingsButton()
+    // {
+    //     if (settingsPanel != null)
+    //     {
+    //         settingsPanel.SetActive(false);
+    //     }
+    // }
 
     // Nút "Thoát"
     public void OnQuitButton()
@@ -78,34 +79,100 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Image soundIcon;
     [SerializeField] private Sprite soundOnSprite;
     [SerializeField] private Sprite soundOffSprite;
+    [SerializeField] private Button soundToggleButton;
+
+    private bool isSubscribedToMuteEvent;
+    private Coroutine waitForAudioManagerCoroutine;
 
     private void OnEnable()
     {
-        if (AudioManager.Instance != null)
+        TryBindAudioManager();
+
+        if (!isSubscribedToMuteEvent)
         {
-            AudioManager.Instance.OnMuteStateChanged += HandleMuteStateChanged;
-            HandleMuteStateChanged(AudioManager.Instance.IsMuted);
+            waitForAudioManagerCoroutine = StartCoroutine(WaitAndBindAudioManager());
         }
     }
 
     private void OnDisable()
     {
-        if (AudioManager.Instance != null)
+        if (waitForAudioManagerCoroutine != null)
+        {
+            StopCoroutine(waitForAudioManagerCoroutine);
+            waitForAudioManagerCoroutine = null;
+        }
+
+        if (isSubscribedToMuteEvent && AudioManager.Instance != null)
         {
             AudioManager.Instance.OnMuteStateChanged -= HandleMuteStateChanged;
+            isSubscribedToMuteEvent = false;
         }
     }
 
     public void OnSoundToggleClicked()
     {
+        if (!isSubscribedToMuteEvent)
+        {
+            TryBindAudioManager();
+        }
+
         AudioManager.Instance?.ToggleMute();
     }
 
     private void HandleMuteStateChanged(bool isMuted)
     {
+        Image targetImage = ResolveSoundTargetImage();
+        if (targetImage != null)
+        {
+            targetImage.sprite = isMuted ? soundOffSprite : soundOnSprite;
+        }
+    }
+
+    private void TryBindAudioManager()
+    {
+        if (isSubscribedToMuteEvent || AudioManager.Instance == null)
+        {
+            return;
+        }
+
+        AudioManager.Instance.OnMuteStateChanged += HandleMuteStateChanged;
+        isSubscribedToMuteEvent = true;
+        HandleMuteStateChanged(AudioManager.Instance.IsMuted);
+    }
+
+    private IEnumerator WaitAndBindAudioManager()
+    {
+        while (!isSubscribedToMuteEvent)
+        {
+            TryBindAudioManager();
+            if (isSubscribedToMuteEvent)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        waitForAudioManagerCoroutine = null;
+    }
+
+    private Image ResolveSoundTargetImage()
+    {
         if (soundIcon != null)
         {
-            soundIcon.sprite = isMuted ? soundOffSprite : soundOnSprite;
+            return soundIcon;
         }
+
+        if (soundToggleButton == null)
+        {
+            return null;
+        }
+
+        if (soundToggleButton.targetGraphic is Image targetGraphicImage)
+        {
+            return targetGraphicImage;
+        }
+
+        return soundToggleButton.image;
     }
 }
